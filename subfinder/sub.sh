@@ -16,7 +16,7 @@ subfinder -d $TARGET -all -silent > $SUBFINDER_TMP_FILE
 if [ -f $NEW_DOMAINS_FILE ]; then
         echo "----------------------------------------------------------------------------" >> $NEW_DOMAINS_LOGS
         date >> $NEW_DOMAINS_LOGS
-        cat $NEW_DOMAINS_FILE >> $SUBFINDER_FILE && rm -f $NEW_DOMAINS_FILE
+        cat $NEW_DOMAINS_FILE >> $NEW_DOMAINS_LOGS && cat $NEW_DOMAINS_FILE >> $SUBFINDER_FILE && rm -f $NEW_DOMAINS_FILE
 fi
 
 while IFS= read -r line; do
