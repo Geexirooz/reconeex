@@ -20,7 +20,7 @@ if [ -f $NEW_DOMAINS_FILE ]; then
 fi
 
 while IFS= read -r line; do
-     grep -q $line $SUBFINDER_FILE || echo $line >> $NEW_DOMAINS_FILE
+     grep -q "$line" $SUBFINDER_FILE || echo $line >> $NEW_DOMAINS_FILE
 done < $SUBFINDER_TMP_FILE
 
 rm -f $SUBFINDER_TMP_FILE
