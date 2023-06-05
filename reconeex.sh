@@ -85,7 +85,7 @@ dns_brute_force_static(){
 
     wlist_static_dns
 
-    echo [INFO] Running Shuffledns using the merged wordlist...
+    echo [INFO] Running Shuffledns (static-bruteforce) using the merged wordlist...
     shuffledns -silent -w dns-static-wlist.txt -d $1 -r $SHUFFLEDNS_RESOLVERS_FILENAME -m $MASS_DNS_PATH -o $STATIC_DNS_BRUTE_FILENAME
     echo [INFO] Shuffledns finished!
 }
@@ -137,7 +137,7 @@ dns_brute_force_static $TARGET
 #{
 #    wlist_dynamic_dns $SUBFINDER_FILENAME
 #
-#    echo [INFO] Running Shuffledns using the merged wordlist...
+#    echo [INFO] Running Shuffledns (dynamic-bruteforce) using the merged wordlist...
 #    shuffledns -l dns-dynamic-wlist.txt -d $1 -r $SHUFFLEDNS_RESOLVERS_FILENAME -m $MASS_DNS_PATH -o $DYNAMIC_DNS_BRUTE_FILENAME
 #    echo [INFO] Shuffledns finished!
 #}
