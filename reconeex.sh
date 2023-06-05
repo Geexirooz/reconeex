@@ -8,7 +8,7 @@ TABLE_NAME=$2
 DATABASE_NAME='bugbounty'
 DATE=$(date +'%Y-%m-%d %H:%M:%S')
 QUERY_CMD="sudo mysql -D $DATABASE_NAME -e"
-SUBDOMAINS_FILEANME='subdomains.txt'
+SUBDOMAINS_FILEANME='domains.txt'
 SUBFINDER_FILEANME='subfinder.out'
 DYNAMIC_DNS_BRUTE_FILENAME='shuffledns_brute_dynamic.out'
 STATIC_DNS_BRUTE_FILENAME='shuffledns_brute_static.out'
@@ -33,7 +33,7 @@ fi
 #####################
 run_subfinder(){
   echo [INFO] Running subfinder...
-  subfinder -silent -d $1 -all -o $SUBDOMAINS_FILEANME
+  subfinder -silent -d $1 -all -o $SUBFINDER_FILEANME > /dev/null
   echo [INFO] Subfinder finished...
 }
 run_subfinder $TARGET
