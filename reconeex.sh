@@ -12,7 +12,7 @@ SUBDOMAINS_FILEANME='domains.txt'
 SUBFINDER_FILEANME='subfinder.out'
 DYNAMIC_DNS_BRUTE_FILENAME='shuffledns_brute_dynamic.out'
 STATIC_DNS_BRUTE_FILENAME='shuffledns_brute_static.out'
-SHUFFLEDNS_RESOLVERS_FILENAME='~/.resolvers'
+SHUFFLEDNS_RESOLVERS_FILENAME='/PATH/TO/.resolvers'
 MASS_DNS_PATH='/PATH/TO/massdns'
 
 
@@ -34,13 +34,13 @@ fi
 run_subfinder(){
   echo [INFO] Running subfinder...
   subfinder -silent -d $1 -all -o $SUBFINDER_FILEANME > /dev/null
-  echo [INFO] Subfinder finished...
 }
 run_subfinder $TARGET
 
 #####################
 #This section writes all subdomains found by subfinder in the database
 #####################
+echo [INFO] Writing Subfinder results to the database...
 for i in $(cat $SUBFINDER_FILEANME | anew $SUBDOMAINS_FILEANME);do
 
   #check if the subdomain already exists in the database
@@ -149,6 +149,7 @@ dns_brute_force_static $TARGET
 #This part write all subdomains found by above dns bruteforce attacks (dynamic+static)
 #It specifies that the subdomain is found by DNS bruteforce attack (also put in the time that it was found)
 #####################
+echo [INFO] Writing DNS bruteforce results to the database...
 for i in $(cat $DYNAMIC_DNS_BRUTE_FILENAME $STATIC_DNS_BRUTE_FILENAME | anew $SUBDOMAINS_FILEANME); do
 
   #Check if subdomain exists
@@ -167,6 +168,7 @@ done
 #It also puts in the time of resolution
 #It can as well update a subdomain which was not resolved at the previous runs if it gets resolved at this run
 #####################
+echo [INFO] Resolving domains and writing the DNS records to the database...
 for i in $(cat $SUBDOMAINS_FILEANME | dnsx -silent);do
 
   #To check if the subdomain is already resolved, if so it does not touch it
@@ -179,4 +181,4 @@ for i in $(cat $SUBDOMAINS_FILEANME | dnsx -silent);do
 
 done
 
-echo Reconeex ran successfully...!
+echo [INFO] Reconeex ran successfully...!
