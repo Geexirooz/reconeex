@@ -137,8 +137,7 @@ dns_brute_force_static $TARGET
 #####################
 #This executes a dynamic DNS bruteforce
 #####################
-#dns_brute_force_dynamic ()
-#{
+#dns_brute_force_dynamic(){
 #    wlist_dynamic_dns $SUBDOMAINS_FILENAME
 #
 #    echo [INFO] Running Shuffledns \(dynamic-bruteforce\) using the merged wordlist...
