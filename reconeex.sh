@@ -8,8 +8,8 @@ TABLE_NAME=$2
 DATABASE_NAME='bugbounty'
 DATE=$(date +'%Y-%m-%d %H:%M:%S')
 QUERY_CMD="sudo mysql -D $DATABASE_NAME -e"
-SUBDOMAINS_FILEANME='domains.txt'
-SUBFINDER_FILEANME='subfinder.out'
+SUBDOMAINS_FILENAME='domains.txt'
+SUBFINDER_FILENAME='subfinder.out'
 DYNAMIC_DNS_BRUTE_FILENAME='shuffledns_brute_dynamic.out'
 STATIC_DNS_BRUTE_FILENAME='shuffledns_brute_static.out'
 SHUFFLEDNS_RESOLVERS_FILENAME='/PATH/TO/.resolvers'
@@ -24,8 +24,8 @@ $QUERY_CMD "CREATE  TABLE IF NOT EXISTS \`$DATABASE_NAME\`.\`$TABLE_NAME\` (\`su
 #####################
 #This creates the file which contains all subdomains found by any tools (This does its job at the first run)
 #####################
-if [ ! -f "$SUBDOMAINS_FILEANME" ]; then
-    touch $SUBDOMAINS_FILEANME
+if [ ! -f "$SUBDOMAINS_FILENAME" ]; then
+    touch $SUBDOMAINS_FILENAME
 fi
 
 #####################
@@ -33,7 +33,7 @@ fi
 #####################
 run_subfinder(){
   echo [INFO] Running subfinder...
-  subfinder -silent -d $1 -all -o $SUBFINDER_FILEANME > /dev/null
+  subfinder -silent -d $1 -all -o $SUBFINDER_FILENAME > /dev/null
 }
 run_subfinder $TARGET
 
@@ -41,7 +41,7 @@ run_subfinder $TARGET
 #This section writes all subdomains found by subfinder in the database
 #####################
 echo [INFO] Writing Subfinder results to the database...
-for i in $(cat $SUBFINDER_FILEANME | anew $SUBDOMAINS_FILEANME);do
+for i in $(cat $SUBFINDER_FILENAME | anew $SUBDOMAINS_FILENAME);do
 
   #check if the subdomain already exists in the database
   RESULT=`$QUERY_CMD "SELECT * FROM $TABLE_NAME WHERE subdomain='$i';"`
@@ -150,7 +150,7 @@ dns_brute_force_static $TARGET
 #It specifies that the subdomain is found by DNS bruteforce attack (also put in the time that it was found)
 #####################
 echo [INFO] Writing DNS bruteforce results to the database...
-for i in $(cat $DYNAMIC_DNS_BRUTE_FILENAME $STATIC_DNS_BRUTE_FILENAME | anew $SUBDOMAINS_FILEANME); do
+for i in $(cat $DYNAMIC_DNS_BRUTE_FILENAME $STATIC_DNS_BRUTE_FILENAME | anew $SUBDOMAINS_FILENAME); do
 
   #Check if subdomain exists
   RESULT=`$QUERY_CMD "SELECT * FROM $TABLE_NAME WHERE subdomain='$i';"`
@@ -169,7 +169,7 @@ done
 #It can as well update a subdomain which was not resolved at the previous runs if it gets resolved at this run
 #####################
 echo [INFO] Resolving domains and writing the DNS records to the database...
-for i in $(cat $SUBDOMAINS_FILEANME | dnsx -silent);do
+for i in $(cat $SUBDOMAINS_FILENAME | dnsx -silent);do
 
   #To check if the subdomain is already resolved, if so it does not touch it
   RESULT=`$QUERY_CMD "SELECT * FROM $TABLE_NAME WHERE subdomain='$i' AND resolved=TRUE;"`
