@@ -14,10 +14,15 @@ To sum up, this tool can be re-run at a regular interval to be the first person 
 
 ### What does it leave behind?
 `domains.txt`: This includes all the subdomains found after reconeex has finished running.
+
 `subfinder.out`: This includes all the subdomains found by Subfinder.
+
 `dns-dynamic-wlist.txt`: This includes all the words used for the DNS dynamic bruteforce attack.
+
 `dns-static-wlist.txt`: This includes all the words used for the DNS static bruteforce attack.
+
 `shuffledns_brute_dynamic.out`: This includes all the subdomains found by the DNS dynamic bruteforce attack.
+
 `shuffledns_brute_static.out`: This includes all the subdomains found by the DNS static bruteforce attack.
 
 
