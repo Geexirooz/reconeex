@@ -5,11 +5,11 @@ Congrats!!! Reconeex does that for you.
 
 ### How does it do that?
 1. This tool first creates a table in your Bugbounty database which should be already created in your MySQL server. 
-2. Then it runs Subfinder to find the subdomains of your target and then writes all the results in the table with the timestamp and the subfinder flags showing that when and how the results are found.
-3. Next it performs a static DNS bruteforce using ShuffleDNS and the wordlists called best-dns-wordlist and 2m-subdomains from Assetnote as well as a wordlist containing all permutations of 4-char words.
-4. Afterwards it uses the same tool to run a dynamic DNS bruteforce. The wordlists for the attack are generated using altDNS and DNSgen taking advantage of the subdomains which are found so far (This feature is commented out by default because the wordlists might be huge and not efficient to deploy).
-5. Subsequently it updates the database with the newly discovered subdomains and stating the timestamp and dns_brute flag.
-6. In the end it tries to resolve all subdomains and update the resolved flag in the table with the timestamp to indicate when it was resolved. 
+2. Then it runs [Subfinder](https://github.com/projectdiscovery/subfinder) to find the subdomains of your target and then writes all the results in the table with the `subfinder_time` and the `subfinder` fields showing that when and how the results are found.
+3. Next it performs a static DNS bruteforce using [ShuffleDNS](https://github.com/projectdiscovery/shuffledns) and the wordlists called [best-dns-wordlist](https://wordlists-cdn.assetnote.io/data/manual/best-dns-wordlist.txt) and [2m-subdomains](https://wordlists-cdn.assetnote.io/data/manual/2m-subdomains.txt) from [Assetnote](https://assetnote.io/) as well as a wordlist containing all permutations of 4-char words.
+4. Afterwards it uses the same tool to run a dynamic DNS bruteforce. The wordlists for the attack are generated using [altDNS](https://github.com/infosec-au/altdns) and [DNSgen](https://github.com/ProjectAnte/dnsgen) taking advantage of the subdomains which are found so far (This feature is commented out by default because the wordlists might be huge and not efficient to deploy).
+5. Subsequently it updates the database with the newly discovered subdomains and stating the timestamp and `dns_brute` flag.
+6. In the end it tries to resolve all subdomains and update the `resolved` flag in the table with the timestamp to indicate when it was resolved. 
 To sum up, this tool can be re-run at a regular interval to be the first person to find a resolveable subdomain or even its existence.
 
 ### What does it leave behind?
