@@ -30,6 +30,7 @@ To sum up, this tool can be re-run at a regular interval to be the first person 
 
 ### command line 
 ```
+chmod u+x reconeex
 # reconeex <TARGET> <TABLE_NAME>
 ./reconeex asda.com ASDA
 ```
