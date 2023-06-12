@@ -30,6 +30,10 @@ To sum up, this tool can be re-run at a regular interval to be the first person 
 
 ### command line 
 ```
+#set EVs
+export SHUFFLEDNS_RESOLVERS='/path/to/resolvers'
+export MASS_DNS='path/to/massdns'
+#make the script executable
 chmod u+x reconeex
 # reconeex <TARGET> <TABLE_NAME>
 ./reconeex asda.com ASDA
