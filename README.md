@@ -97,3 +97,11 @@ chmod u+x reconeex
 | ak-dfw-f5-groceries-it2.asda.com       |        1 | 2023-06-06 10:24:46 | NULL |         1 | 2023-06-06 10:24:46 |         0 | NULL                |           0 | NULL             |
 +----------------------------------------+----------+---------------------+------+-----------+---------------------+-----------+---------------------+-------------+------------------+
 ```
+
+## To-Do List:
+
+1. Enable/disable dynamic dns bruteforce via command-line
+2. Give a desired generator wordlist to dynamic brute force instead of '/tmp/words-merged.txt_$TARGET' file
+3. Make tmp file names central so editing will be much easier
+4. Add certificate search feature
+5. append differences to files instead of overriding (e.g. subfinder output)
