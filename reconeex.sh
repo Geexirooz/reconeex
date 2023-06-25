@@ -115,7 +115,7 @@ dns_brute_force_static $TARGET
 #    curl -s https://raw.githubusercontent.com/infosec-au/altdns/master/words.txt -o /tmp/altdns-words.txt_$TARGET
 #
 #    echo [INFO] Merging the wordlists...
-#    cat /tmp/altdns-words.txt /tmp/dnsgen-words.txt | sort -u > /tmp/words-merged.txt_$TARGET
+#    cat /tmp/altdns-words.txt_$TARGET /tmp/dnsgen-words.txt_$TARGET | sort -u > /tmp/words-merged.txt_$TARGET
 #
 #    echo [INFO] Removing the merged wordlists...
 #    rm -rf /tmp/altdns-words.txt_$TARGET /tmp/dnsgen-words.txt_$TARGET
