@@ -64,20 +64,20 @@ wlist_static_dns(){
         echo [INFO] Starting static DNS bruteforce attack...
 
         echo [INFO] Downloading \'best-dns-wordlist.txt\' wordlist from AssetNotes...
-        curl -s https://wordlists-cdn.assetnote.io/data/manual/best-dns-wordlist.txt -o /tmp/best-dns-wordlist.txt
+        curl -s https://wordlists-cdn.assetnote.io/data/manual/best-dns-wordlist.txt -o /tmp/best-dns-wordlist.txt_$TARGET
 
         echo [INFO] Downloading \'2m-subdomains.txt\' wordlist from AssetNotes...
-        curl -s https://wordlists-cdn.assetnote.io/data/manual/2m-subdomains.txt -o /tmp/2m-subdomains.txt
+        curl -s https://wordlists-cdn.assetnote.io/data/manual/2m-subdomains.txt -o /tmp/2m-subdomains.txt_$TARGET
 
         echo [INFO] Creating \'4-chars-wlist.txt\' wordlist using Crunch...
-        crunch 1 4 abcdefghijklmnopqrstuvwxyz1234567890 -o /tmp/4-chars-wlist.txt &> /dev/null
+        crunch 1 4 abcdefghijklmnopqrstuvwxyz1234567890 -o /tmp/4-chars-wlist.txt_$TARGET &> /dev/null
 
         echo [INFO] Merging all wordlists into one...
-        cat /tmp/best-dns-wordlist.txt /tmp/2m-subdomains.txt /tmp/4-chars-wlist.txt | sort -u > dns-static-wlist.txt
+        cat /tmp/best-dns-wordlist.txt_$TARGET /tmp/2m-subdomains.txt_$TARGET /tmp/4-chars-wlist.txt_$TARGET | sort -u > dns-static-wlist.txt
         echo [INFO] There are `wc -l dns-static-wlist.txt` words in the merged wordlist
 
         echo [INFO] Removing the the merged wordlists...
-        rm -f /tmp/4-chars-wlist.txt /tmp/2m-subdomains.txt /tmp/best-dns-wordlist.txt
+        rm -f /tmp/4-chars-wlist.txt_$TARGET /tmp/2m-subdomains.txt_$TARGET /tmp/best-dns-wordlist.txt_$TARGET
 }
 
 #####################
@@ -109,29 +109,29 @@ dns_brute_force_static $TARGET
 #    echo [INFO] Starting dynamic DNS bruteforce attack...
 #
 #    echo [INFO] Downloading DNSgen wordlist...
-#    curl -s https://raw.githubusercontent.com/ProjectAnte/dnsgen/master/dnsgen/words.txt -o /tmp/dnsgen-words.txt
+#    curl -s https://raw.githubusercontent.com/ProjectAnte/dnsgen/master/dnsgen/words.txt -o /tmp/dnsgen-words.txt_$TARGET
 #
 #    echo [INFO] Downloading altDNS wordlist...
-#    curl -s https://raw.githubusercontent.com/infosec-au/altdns/master/words.txt -o /tmp/altdns-words.txt
+#    curl -s https://raw.githubusercontent.com/infosec-au/altdns/master/words.txt -o /tmp/altdns-words.txt_$TARGET
 #
 #    echo [INFO] Merging the wordlists...
-#    cat /tmp/altdns-words.txt /tmp/dnsgen-words.txt | sort -u > /tmp/words-merged.txt
+#    cat /tmp/altdns-words.txt /tmp/dnsgen-words.txt | sort -u > /tmp/words-merged.txt_$TARGET
 #
 #    echo [INFO] Removing the merged wordlists...
-#    rm -rf /tmp/altdns-words.txt /tmp/dnsgen-words.txt
+#    rm -rf /tmp/altdns-words.txt_$TARGET /tmp/dnsgen-words.txt_$TARGET
 #
 #    echo [INFO] Running DNSgen...
-#    cat $1 | dnsgen -w /tmp/words-merged.txt - > /tmp/dynamic-dnsgen.txt
+#    cat $1 | dnsgen -w /tmp/words-merged.txt_$TARGET - > /tmp/dynamic-dnsgen.txt_$TARGET
 #
 #    echo [INFO] Running altDNS...
-#    altdns -i $1 -w /tmp/words-merged.txt -o /tmp/dynamic-altdns.txt
+#    altdns -i $1 -w /tmp/words-merged.txt_$TARGET -o /tmp/dynamic-altdns.txt_$TARGET
 #
 #    echo [INFO] Merging the dynamic wordlists...
-#    cat /tmp/dynamic-altdns.txt /tmp/dynamic-dnsgen.txt | sort -u > dns-dynamic-wlist.txt
+#    cat /tmp/dynamic-altdns.txt_$TARGET /tmp/dynamic-dnsgen.txt_$TARGET | sort -u > dns-dynamic-wlist.txt
 #    echo [INFO] There are `wc -l dns-dynamic-wlist.txt` words in the merged wordlist
 #
 #    echo [INFO] Removing the merged wordlists...
-#    rm -rf /tmp/dynamic-dnsgen.txt /tmp/dynamic-altdns.txt /tmp/words-merged.txt
+#    rm -rf /tmp/dynamic-dnsgen.txt_$TARGET /tmp/dynamic-altdns.txt_$TARGET /tmp/words-merged.txt_$TARGET
 #}
 
 #####################
