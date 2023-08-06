@@ -105,3 +105,4 @@ chmod u+x reconeex
 3. Make tmp file names central so editing will be much easier
 4. Add certificate search feature
 5. append differences to files instead of overriding (e.g. subfinder output)
+6. add a proper help menu
